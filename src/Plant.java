@@ -1,9 +1,7 @@
-/**
- * Created by Armin on 6/25/2016.
- */
+
 public abstract class Plant {
 
-    private int health = 4000;
+    private int health = 2000;
 
     private int x;
     private int y;

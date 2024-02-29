@@ -3,9 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- * Created by Armin on 6/27/2016.
- */
+
 public class Sun extends JPanel implements MouseListener {
 
     private static final long serialVersionUID = 1L;

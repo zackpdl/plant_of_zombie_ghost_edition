@@ -1,11 +1,9 @@
 import javax.swing.*;
 
-/**
- * Created by Armin on 6/25/2016.
- */
+
 public class Zombie {
 
-    private int health = 5000;
+    private int health = 2500;
     private int speed = 1;
 
     private GamePanel gp;
@@ -25,7 +23,7 @@ public class Zombie {
     public void advance() {
         if (isMoving) {
         	 int movementSpeed = speed; // Default speed
-             if (health < 200) { // If health is below 50% of the initial value (assuming initial is 1000)
+             if (health < 1500) { //low health
                  movementSpeed *= 5; // Double the speed
              }
             boolean isCollides = false;
@@ -50,14 +48,14 @@ public class Zombie {
             	Plant collidedPlant = collided.getAssignedPlant();
             	if (collidedPlant instanceof Sunflower) {
             	    Sunflower sunflower = (Sunflower) collidedPlant;
-            	    sunflower.setHealth(sunflower.getHealth() - 100);
+            	    sunflower.setHealth(sunflower.getHealth() - 10);
             	    if (sunflower.getHealth() <= 0) {
             	        gp.removeSunflower(collided.getX(), collided.getY()); 
             	        Zombie collidedZombie = collided.getCollidedZombie(); 
             	        System.out.println("Explosion triggered.");
             	   
             	        if (collidedZombie != null) {
-            	            collidedZombie.reduceHealth(500); 
+            	            collidedZombie.reduceHealth(10); 
             	        }
             	    }
             	} else {

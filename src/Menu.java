@@ -7,9 +7,7 @@ import java.awt.*;
  * and open the template in the editor.
  */
 
-/**
- * @author Vaibhav Sikarwar
- */
+
 public class Menu extends JPanel {
 
     private static final long serialVersionUID = 1L;

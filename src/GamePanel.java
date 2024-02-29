@@ -11,10 +11,6 @@ import java.util.Random;
 import java.io.InputStream;
 
 
-
-/**
- * Created by Armin on 6/25/2016.
- */
 public class GamePanel extends JLayeredPane implements MouseMotionListener {
 
     private static final long serialVersionUID = 1L;
@@ -53,7 +49,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
 
     // Add this method to update the label on the screen
     public void updateZombiesDiedLabel() {
-        zombiesDiedLabel.setText("Zombies Died: " + totalZombiesKilled);
+        zombiesDiedLabel.setText("Demons Died: " + totalZombiesKilled);
     }
 
 
@@ -77,17 +73,17 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
         setLayout(null);
         addMouseMotionListener(this);
         this.sunScoreboard = sunScoreboard;
-        setSunScore(275); 
+        setSunScore(300); 
         startBackgroundMusic();
 
         bgImage = new ImageIcon(this.getClass().getResource("images/mainBG.png")).getImage();
 
       
         peashooterImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter2.gif")).getImage();
-        freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/freezepeashooter.gif")).getImage();
+        freezePeashooterImage = new ImageIcon(this.getClass().getResource("images/plants/freezepeashooter2.png")).getImage();
         sunflowerImage = new ImageIcon(this.getClass().getResource("images/plants/sunflower.gif")).getImage();
         peaImage = new ImageIcon(this.getClass().getResource("images/arrow.png")).getImage();
-        freezePeaImage = new ImageIcon(this.getClass().getResource("images/freezepea.png")).getImage();
+        freezePeaImage = new ImageIcon(this.getClass().getResource("images/arrow.png")).getImage();
         shortRangeImage = new ImageIcon(this.getClass().getResource("images/plants/peashooter.gif")).getImage();
         axeImage = new ImageIcon(this.getClass().getResource("images/pea.png")).getImage();
 
@@ -117,7 +113,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
             add(a,0);
         }
      // Zombies dead label
-        zombiesDiedLabel = new JLabel("Zombies Killed: " + totalZombiesKilled);
+        zombiesDiedLabel = new JLabel("demons died: " + totalZombiesKilled);
         zombiesDiedLabel.setForeground(Color.BLACK);
         zombiesDiedLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         zombiesDiedLabel.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -136,7 +132,7 @@ public class GamePanel extends JLayeredPane implements MouseMotionListener {
         advancerTimer = new Timer(60, (ActionEvent e) -> advance());
         advancerTimer.start();
 
-        sunProducer = new Timer(2000, (ActionEvent e) -> {
+        sunProducer = new Timer(5000, (ActionEvent e) -> {
             Random rnd = new Random();
             Sun sta = new Sun(this, rnd.nextInt(800) + 100, 0, rnd.nextInt(300) + 200);
             activeSuns.add(sta);
@@ -217,7 +213,7 @@ private void startBackgroundMusic() {
             ArrayList<Zombie> zombiesInLane = laneZombies.get(i);
             for (int j = 0; j < zombiesInLane.size(); j++) {
                 Zombie zombie = zombiesInLane.get(j);
-                if (zombie.getPosX() < 20 + (x * 100)) { 
+                if (zombie.getPosX() < 5 + (x * 10)) { 
                     zombiesInLane.remove(j);
                     j--; 
                 }
@@ -279,11 +275,13 @@ private void startBackgroundMusic() {
                 if (pea instanceof FreezePea) {
                     g.drawImage(freezePeaImage, pea.getPosX(), 130 + (i * 120), null);
                 }
-                if (pea instanceof Axe) {
-                     g.drawImage(axeImage, pea.getPosX(), 130 + (i * 120), null);
+                else if (pea instanceof Axe) {
+                	g.drawImage(axeImage, pea.getPosX(), 130 + (i * 120), null);
+                     
                     
                     } else {
-                    g.drawImage(peaImage, pea.getPosX(), 130 + (i * 120), null);
+                    	g.drawImage(peaImage, pea.getPosX(), 130 + (i * 120), null);
+                    	
                 }
             }
 
@@ -351,11 +349,16 @@ private void startBackgroundMusic() {
     public static void setProgress(int num) {
         progress = progress + num;
         System.out.println(progress);
-        if (progress >= 150) {
+        if (progress >= 350) {
             if ("1".equals(LevelData.LEVEL_NUMBER)) {
                 JOptionPane.showMessageDialog(null, "LEVEL_CONTENT Completed !!!" + '\n' + "Starting next LEVEL_CONTENT");
                 GameWindow.gw.dispose();
                 LevelData.write("2");
+                GameWindow.gw = new GameWindow();
+            } else if ("2".equals(LevelData.LEVEL_NUMBER)) {
+                JOptionPane.showMessageDialog(null, "LEVEL_CONTENT Completed !!!" + '\n' + "Starting next LEVEL_CONTENT");
+                GameWindow.gw.dispose();
+                LevelData.write("3");
                 GameWindow.gw = new GameWindow();
             } else {
                 JOptionPane.showMessageDialog(null, "LEVEL_CONTENT Completed !!!" + '\n' + "More Levels will come soon !!!" + '\n' + "Resetting data");

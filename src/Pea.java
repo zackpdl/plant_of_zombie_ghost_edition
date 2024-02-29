@@ -1,8 +1,5 @@
 import java.awt.*;
 
-/**
- * Created by Armin on 6/25/2016.
- */
 public class Pea {
 
     private static int totalZombiesKilled = 0;
@@ -22,7 +19,7 @@ public class Pea {
             Zombie z = gp.getLaneZombies().get(myLane).get(i);
             Rectangle zRect = new Rectangle(z.getPosX(), 109 + myLane * 120, 400, 120);
             if (pRect.intersects(zRect)) {
-                z.setHealth(z.getHealth() - 300);
+                z.setHealth(z.getHealth() - 500);
      
                 if (z.getHealth() < 0) {
                     System.out.println("ZOMBIE DIED");
@@ -59,10 +56,11 @@ public class Pea {
         this.myLane = myLane;
     }
 
-	public static int getTotalZombiesKilled() {
-		return totalZombiesKilled;
-	}
-	public static void incrementTotalZombiesKilled() {
+    protected static int getTotalZombiesKilled() {
+        return totalZombiesKilled;
+    }
+
+    protected static void incrementTotalZombiesKilled() {
         totalZombiesKilled++;
     }
 	

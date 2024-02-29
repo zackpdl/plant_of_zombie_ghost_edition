@@ -16,7 +16,7 @@ private int health;
                 int zombieDistance = zombie.getPosX() - getX();
                 if (zombieDistance > 0 && zombieDistance < SHOOT_RANGE) {
                     getGp().getLanePeas().get(y).add(new Axe(getGp(), y, 103 + this.getX() * 100));
-                    break; // Only shoot one pea for the closest zombie
+                    break; 
                 }
             }
         });
@@ -28,12 +28,11 @@ private int health;
         shootTimer.stop();
     }
 
-    // Getter for health
     public int getHealth() {
         return health;
     }
 
-    // Setter for health
+   
     public void setHealth(int health) {
         this.health = health;
     }

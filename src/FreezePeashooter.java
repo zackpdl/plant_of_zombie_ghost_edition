@@ -2,16 +2,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-/**
- * Created by Armin on 6/25/2016.
- */
+
 public class FreezePeashooter extends Plant {
     private Timer shootTimer;
 
     public FreezePeashooter(GamePanel parent, int x, int y) {
         super(parent, x, y);
         shootTimer = new Timer(1000, (ActionEvent e) -> {
-            // Check if the peashooter is not at the far edges of the lane
+          //Peashooter in range
             if (getX() > 0 && getX() < 1000) {
                 ArrayList<Zombie> zombies = getGp().getLaneZombies().get(y);
                 if (!zombies.isEmpty()) {

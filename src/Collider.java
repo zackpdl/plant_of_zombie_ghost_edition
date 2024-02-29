@@ -4,9 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- * Created by Armin on 6/25/2016.
- */
+
 public class Collider extends JPanel implements MouseListener {
 
     private static final long serialVersionUID = 1L;

@@ -1,11 +1,8 @@
 import java.awt.*;
 
-/**
- * Created by Armin on 6/28/2016.
- */
 public class FreezePea extends Pea {
     private boolean isDetectZombieToLeft = false;
-    private static int totalZombiesKilled = 0;// Flag to track if a zombie is detected to the left
+    private static int totalZombiesKilled = 0; // Flag to track if a zombie is detected to the left
 
     public FreezePea(GamePanel parent, int lane, int startX) {
         super(parent, lane, startX);
@@ -21,32 +18,33 @@ public class FreezePea extends Pea {
             if (pRect.intersects(zRect)) {
                 // Check if the zombie is to the left
                 if (z.getPosX() < getPosX()) {
-                    setDetectZombieToLeft(true); // Set flag to true if a zombie is detected to the left
+                    setDetectZombieToLeft(true); // Set true if a zombie is detected to the left
                     z.setHealth(z.getHealth() - 500);
                     z.slow();
-                   
+
                     if (z.getHealth() <= 0) {
                         System.out.println("ZOMBIE DIE");
                         GamePanel.setProgress(10);
                         gp.getLaneZombies().get(getMyLane()).remove(i);
-                        totalZombiesKilled++; 
-                        gp.zombieDied();  // Call the method to update total zombie count
-// Increment the total count
-
-                      
-
-            
+                        Pea.incrementTotalZombiesKilled();
+                        System.out.println("Total zombies killed in FreezePea class: " + Pea.getTotalZombiesKilled());
+                        gp.zombieDied();
                     }
+
                     gp.getLanePeas().get(getMyLane()).remove(this); // Remove the pea at collision
                     return;
                 } else {
-                    z.setHealth(z.getHealth() - 100); // Damage the zombie even if it's on the right side
+                    z.setHealth(z.getHealth() - 500); // Damage the zombie on the right side
+
                     if (z.getHealth() <= 0) {
                         System.out.println("ZOMBIE DIE");
                         GamePanel.setProgress(10);
+                        Pea.incrementTotalZombiesKilled(); // Increment the total count
                         gp.getLaneZombies().get(getMyLane()).remove(i);
-                        
+                        gp.zombieDied();
+
                     }
+
                     gp.getLanePeas().get(getMyLane()).remove(this); // Remove the pea at collision
                     return;
                 }
@@ -71,8 +69,4 @@ public class FreezePea extends Pea {
     public static int getTotalZombiesKilled() {
         return totalZombiesKilled;
     }
-
 }
-
-    
-
