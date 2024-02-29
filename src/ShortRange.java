@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 
 public class ShortRange extends Plant {
 	private Timer shootTimer;
-private static final int SHOOT_RANGE = 700; // The range until the defender detects attacker
+private static final int SHOOT_RANGE = 400; // The range until the defender detects attacker
 private int health;
 
 
